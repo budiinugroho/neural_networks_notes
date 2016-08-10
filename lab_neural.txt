@@ -108,3 +108,181 @@ nnet <- neuralnet(V1 ~V2 + V3  + V4 + V5 + V6, input, hidden = 5, c(4,5),
                   learningrate = 0.05,
                   linear.output = FALSE)
 plot(nnet)
+
+###ANN
+install.packages("neuralnet")
+library(neuralnet)
+help(neuralnet)
+sample <- read.table("Sample1.txt",header=FALSE)
+Nsample <- dim(sample)[1]
+print(head(sample))
+plot(c(0,1), c(0,1))
+
+
+df <- data.frame(truth, input1, input2)
+
+input <- read.table("Sample1.txt",header=FALSE)
+nnet <- neuralnet(V1~V2 + V3 + V4 + V5 + V6, input, c(4,5))
+plot(nnet)
+
+input <- read.table("Sample1.txt",header=FALSE)
+nnet <- neuralnet(V1 ~V2 + V3  + V4 + V5 + V6, input, c(4,5),
+                  lifesign = "full",
+                  algorithm = "backprop",
+                  learningrate = 0.05,
+                  linear.output = FALSE)
+plot(nnet)
+
+install.packages("pROC")
+library(pROC)
+
+input2 <- read.table("Sample2.txt",header=FALSE)
+nnet <- neuralnet(V1 ~V2 + V3  + V4 + V5 + V6, input2, c(4,5),
+                  lifesign = "full",
+                  algorithm = "backprop",
+                  learningrate = 0.05,
+                  linear.output = FALSE, stepmax = 1e+07)
+plot(nnet)
+
+test=compute(nnet,t(c(1,2,3,2,1)))
+test$net.result
+
+input3 <- read.table("Sample3.txt",header=FALSE)
+nnet <- neuralnet(V1 ~V2 + V3  + V4 + V5 + V6, input3, c(4,5),
+                  lifesign = "full",
+                  algorithm = "backprop",
+                  learningrate = 0.05,
+                  linear.output = FALSE)
+plot(nnet)
+test=compute(nnet,t(c(1,2,3,2,1)))
+test$net.result
+
+
+###8 Problems
+#1. What is the effect of varying the learning parameter ??
+#? = 0.05
+input2 <- read.table("Sample2.txt",header=FALSE)
+print(head(input2))
+plot(c(0,1), c(0,1))
+nnet <- neuralnet(V1 ~V2 + V3  + V4 + V5 + V6, input2, c(4,5),
+                  lifesign = "full",
+                  algorithm = "backprop",
+                  learningrate = 0.05,
+                               linear.output = FALSE, stepmax = 1e+09)
+plot(nnet)
+
+input3 <- read.table("Sample3.txt",header=FALSE)
+print(head(input3))
+
+nnet <- neuralnet(V1 ~V2 + V3  + V4 + V5 + V6, input3, c(4,5),
+                  lifesign = "full",
+                  algorithm = "backprop",
+                  learningrate = 0.05,
+                  linear.output = FALSE,stepmax = 1e+09 )
+plot(nnet)
+
+#? = 0.01
+input2 <- read.table("Sample2.txt",header=FALSE)
+print(head(input2))
+plot(c(0,1), c(0,1))
+nnet <- neuralnet(V1 ~V2 + V3  + V4 + V5 + V6, input2, c(4,5),
+                  lifesign = "full",
+                  algorithm = "backprop",
+                  learningrate = 0.01,
+                  linear.output = FALSE,stepmax=1e09)
+plot(nnet)
+
+input3 <- read.table("Sample3.txt",header=FALSE)
+print(head(input3))
+plot(c(0,1), c(0,1))
+nnet <- neuralnet(V1 ~V2 + V3  + V4 + V5 + V6, input3, c(4,5),
+                  lifesign = "full",
+                  algorithm = "backprop",
+                  learningrate = 0.01,
+                  linear.output = FALSE,stepmax=1e+09)
+plot(nnet)
+
+#? = 0.1
+input2 <- read.table("Sample2.txt",header=FALSE)
+print(head(input2))
+plot(c(0,1), c(0,1))
+nnet <- neuralnet(V1 ~V2 + V3  + V4 + V5 + V6, input2, c(4,5),
+                  lifesign = "full",
+                  algorithm = "backprop",
+                  learningrate = 0.1,
+                  linear.output = FALSE,stepmax=1e+06)
+plot(nnet)
+
+input3 <- read.table("Sample3.txt",header=FALSE)
+print(head(input3))
+plot(c(0,1), c(0,1))
+nnet <- neuralnet(V1 ~V2 + V3  + V4 + V5 + V6, input3, c(4,5),
+                  lifesign = "full",
+                  algorithm = "backprop",
+                  learningrate = 0.001,
+                  linear.output = FALSE,stepmax=1e+09)
+plot(nnet)
+
+#2. What is the effect of using more, or fewer,
+#nodes in the hidden layers?
+#c(1,2)
+input2 <- read.table("Sample2.txt",header=FALSE)
+nnet <- neuralnet(V1 ~V2 + V3  + V4 + V5 + V6, input2, c(1,2),
+                  lifesign = "full",
+                  algorithm = "backprop",
+                  learningrate = 0.05,
+                  linear.output = FALSE)
+plot(nnet)
+#c(9,10)
+input2 <- read.table("Sample2.txt",header=FALSE)
+nnet <- neuralnet(V1 ~V2 + V3  + V4 + V5 + V6, input2, c(9,10),
+                  lifesign = "full",
+                  algorithm = "backprop",
+                  learningrate = 0.05,
+                  linear.output = FALSE)
+plot(nnet)
+
+input3 <- read.table("Sample3.txt",header=FALSE)
+nnet <- neuralnet(V1 ~V2 + V3  + V4 + V5 + V6, input3, c(1,2),
+                  lifesign = "full",
+                  algorithm = "backprop",
+                  learningrate = 0.05,
+                  linear.output = FALSE)
+plot(nnet)
+#c(9,10)
+input3 <- read.table("Sample3.txt",header=FALSE)
+nnet <- neuralnet(V1 ~V2 + V3  + V4 + V5 + V6, input3, c(9,10),
+                  lifesign = "full",
+                  algorithm = "backprop",
+                  learningrate = 0.05,
+                  linear.output = FALSE)
+plot(nnet)
+
+#3. What is the effect of using more, or fewer, hidden layers?
+#hidden = 2
+input2 <- read.table("Sample2.txt",header=FALSE)
+nnet <- neuralnet(V1 ~V2 + V3  + V4 + V5 + V6, input2,
+                  hidden = 2, c(4,5),
+                  lifesign = "full",
+                  algorithm = "backprop",
+                  learningrate = 0.05,
+                  linear.output = FALSE)
+plot(nnet)
+#hidden = 5
+input <- read.table("Sample1.txt",header=FALSE)
+nnet <- neuralnet(V1 ~V2 + V3  + V4 + V5 + V6, input, hidden = 5, c(4,5),
+                  lifesign = "full",
+                  algorithm = "backprop",
+                  learningrate = 0.05,
+                  linear.output = FALSE)
+plot(nnet)
+#What is the effect of pre-processing the input data
+#to give each data input mean zero and standard deviation 1?
+input <- read.table("Sample1.txt",header=FALSE)
+
+nnet <- neuralnet(V1 ~V2 + V3  + V4 + V5 + V6, input, hidden = 5, c(4,5),
+                  lifesign = "full",
+                  algorithm = "backprop",
+                  learningrate = 0.05,
+                  linear.output = FALSE)
+plot(nnet)
