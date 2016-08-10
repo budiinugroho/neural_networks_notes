@@ -1,0 +1,10 @@
+###ANN
+install.packages("neuralnet")
+library(neuralnet)
+help(neuralnet)
+df <- data.frame(truth, input1, input2)
+nnet <- neuralnet(truth ~input1 + input2, df, c(4,5))
+nnet <- neuralnet(truth ~input1 + input2, df, c(4,5),
+                  lifesign = "full",
+                  algorithm)
+
